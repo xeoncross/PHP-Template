@@ -11,7 +11,9 @@
  *
  * @package		PHP-Template
  * @author		http://github.com/Xeoncross/php-template
+                https://github.com/NazarkinRoman
  * @copyright	(c) 2011 David Pennington <http://xeoncross.com>
+                Nazarkin Roman <roman@nazarkin.su>
  * @license		MIT License
  ********************************** 80 Columns *********************************
  */
@@ -159,25 +161,19 @@ class Template
 
 
 	/**
-	 * Convert special characters to HTML safe entities
+	 * Encode/Decode special characters to HTML safe entities
 	 *
-	 * @param string $string to encode
+	 * @param string $string to encode/decode
+	 * @param boolean $decode decodes string
 	 * @return string
 	 */
-	public function e($string)
+	public function e($string, $decode = false)
 	{
-		return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
-	}
+	  if($decode)
+        $func = 'htmlspecialchars_decode';
+      else
+        $func = 'htmlspecialchars';
 
-
-	/**
-	 * Convert dangerous HTML entities into special characters
-	 *
-	 * @param string $s string to decode
-	 * @return string
-	 */
-	public function d($string)
-	{
-		return htmlspecialchars_decode($string, ENT_QUOTES, 'UTF-8');
+      return $func($string, ENT_QUOTES, 'UTF-8');
 	}
 }
